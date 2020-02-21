@@ -15,11 +15,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\asdd\\source\\repos\\ChangeOsuParam\\ChangeOsuParam\\ChangeOsuParam.csproj",
+      "projectUniqueName": "C:\\Users\\asdd\\source\\repos\\ChangeOsuParams\\ChangeOsuParam\\ChangeOsuParam.csproj",
       "projectName": "ChangeOsuParam",
-      "projectPath": "C:\\Users\\asdd\\source\\repos\\ChangeOsuParam\\ChangeOsuParam\\ChangeOsuParam.csproj",
+      "projectPath": "C:\\Users\\asdd\\source\\repos\\ChangeOsuParams\\ChangeOsuParam\\ChangeOsuParam.csproj",
       "packagesPath": "C:\\Users\\asdd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\asdd\\source\\repos\\ChangeOsuParam\\ChangeOsuParam\\obj\\",
+      "outputPath": "C:\\Users\\asdd\\source\\repos\\ChangeOsuParams\\ChangeOsuParam\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
