@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ChangeOsuParam
 {
@@ -67,13 +68,19 @@ namespace ChangeOsuParam
 
         private IEnumerable<string> FetchOneSongFolder(string selectedFolderName, string osuSongsPath)
         {
-            return Directory.GetDirectories(osuSongsPath)
-                .Where(folderPath => Path.GetFileName(folderPath).StartsWith(selectedFolderName)).Take(1);
+            var folder = Directory.GetDirectories(osuSongsPath)
+                                  .FirstOrDefault(folderPath =>
+                                       Path.GetFileName(folderPath)
+                                           .Contains(selectedFolderName, StringComparison.InvariantCultureIgnoreCase));
+
+
+            return Enumerable.Empty<string>().Append(folder);
         }
 
         private IEnumerable<string> FetchSongFolders(string selectedFolderName, string osuSongsPath)
         {
-            return Directory.GetDirectories(osuSongsPath).Where(folder => folder.StartsWith(selectedFolderName));
+            return Directory.GetDirectories(osuSongsPath)
+                            .Where(folder => folder.Contains(selectedFolderName));
         }
     }
 }
