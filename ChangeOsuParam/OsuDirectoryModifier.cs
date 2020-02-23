@@ -80,7 +80,7 @@ namespace ChangeOsuParam
         private IEnumerable<string> FetchSongFolders(string selectedFolderName, string osuSongsPath)
         {
             return Directory.GetDirectories(osuSongsPath)
-                            .Where(folder => folder.Contains(selectedFolderName));
+                            .Where(folder => folder.Contains(selectedFolderName, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }
