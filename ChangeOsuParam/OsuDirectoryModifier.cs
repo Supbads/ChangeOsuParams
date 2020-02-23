@@ -81,7 +81,9 @@ namespace ChangeOsuParam
         private IEnumerable<string> FetchSongFolders(string selectedFolderName, string osuSongsPath)
         {
             return Directory.GetDirectories(osuSongsPath)
-                            .Where(folder => folder.Contains(selectedFolderName, StringComparison.InvariantCultureIgnoreCase));
+                            .Where(folderPath => 
+                                Path.GetFileName(folderPath)
+                                    .Contains(selectedFolderName, StringComparison.InvariantCultureIgnoreCase));
         }
     }
 }
