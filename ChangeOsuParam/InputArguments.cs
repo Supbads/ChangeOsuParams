@@ -35,7 +35,6 @@ namespace ChangeOsuParam
 
             Console.WriteLine("Specify new difficulty value");
             inputArguments.NewDifficultyValue = Console.ReadLine();
-            return inputArguments;
         }
     }
 }

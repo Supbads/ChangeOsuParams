@@ -5,12 +5,12 @@ using System.Collections.Generic;
 
 namespace ChangeOsuParam
 {
-    public class OsuDirectoryModifier
+    public abstract class OsuSongsModifier
     {
-        private const string SongsDirectory = "\\Songs";
+        protected const string SongsDirectory = "\\Songs";
         private string _osuSongsPath;
 
-        public OsuDirectoryModifier(string osuDirectory)
+        public OsuSongsModifier(string osuDirectory)
         {
             this.OsuSongsPath = osuDirectory + SongsDirectory;
         }
@@ -48,11 +48,7 @@ namespace ChangeOsuParam
 
         private void ModifyOsuDirecotriesUnsafe(InputArguments inputArguments)
         {
-            var selectedSongFolders = inputArguments.ChangeOnlyFirstMatchedFolder ?
-                  FetchOneSongFolder(inputArguments.SelectedFolderName, this.OsuSongsPath) :
-                  FetchSongFolders(inputArguments.SelectedFolderName, this.OsuSongsPath);
-
-            selectedSongFolders = selectedSongFolders.ToList();
+            var selectedSongFolders = this.FetchSongsFolder(inputArguments.SelectedFolderName).ToList();
 
             foreach (var songFolder in selectedSongFolders)
             {
@@ -67,23 +63,6 @@ namespace ChangeOsuParam
             }
         }
 
-        private IEnumerable<string> FetchOneSongFolder(string selectedFolderName, string osuSongsPath)
-        {
-            var folder = Directory.GetDirectories(osuSongsPath)
-                                  .FirstOrDefault(folderPath =>
-                                       Path.GetFileName(folderPath)
-                                           .Contains(selectedFolderName, StringComparison.InvariantCultureIgnoreCase));
-
-
-            return Enumerable.Empty<string>().Append(folder);
-        }
-
-        private IEnumerable<string> FetchSongFolders(string selectedFolderName, string osuSongsPath)
-        {
-            return Directory.GetDirectories(osuSongsPath)
-                            .Where(folderPath => 
-                                Path.GetFileName(folderPath)
-                                    .Contains(selectedFolderName, StringComparison.InvariantCultureIgnoreCase));
-        }
+        protected abstract IEnumerable<string> FetchSongsFolder(string selectedFolderName);
     }
 }

@@ -15,9 +15,18 @@ namespace ChangeOsuParam
                     inputArguments.ReadInputArguments();
 
                     var currentDir = Directory.GetCurrentDirectory(); // Assume we're in the osu! directory
-                    var osuDirModifier = new OsuDirectoryModifier(currentDir);
 
-                    osuDirModifier.TryModifyOsuDirectories(inputArguments);
+                    OsuSongsModifier osuSongsModifier = null;
+                    if (inputArguments.ChangeOnlyFirstMatchedFolder)
+                    {
+                        osuSongsModifier = new OsuSingleSongModifier(currentDir);
+                    }
+                    else
+                    {
+                        osuSongsModifier = new OsuMultiSongsModifier(currentDir);
+                    }
+
+                    osuSongsModifier.TryModifyOsuDirectories(inputArguments);
                 }
                 catch (Exception ex)
                 {
