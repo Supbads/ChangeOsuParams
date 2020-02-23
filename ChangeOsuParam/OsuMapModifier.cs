@@ -39,11 +39,15 @@ namespace ChangeOsuParam
                 throw new IndexOutOfRangeException($"Could not find difficulty in osu map file: {Path.GetFileName(this._osuMapPath)}");
             }
 
-            string difficultyLine = osuMapLines[difficultyLineIndex];
-            string newLine = GetUpdatedDifficltyLine(arguments.NewDifficultyValue, difficultyLine);
-            osuMapLines[difficultyLineIndex] = newLine;
+            UpdateFileLine(arguments, osuMapLines, difficultyLineIndex);
+            SaveChangesToFile(osuMapLines);
+        }
 
-            File.WriteAllLines(this._osuMapPath, osuMapLines);
+        private void UpdateFileLine(InputArguments arguments, string[] osuMapLines, int difficultyLineIndex)
+        {
+            string difficultyLineToUpdate = osuMapLines[difficultyLineIndex];
+            string newLine = GetUpdatedDifficltyLine(arguments.NewDifficultyValue, difficultyLineToUpdate);
+            osuMapLines[difficultyLineIndex] = newLine;
         }
 
         private int FindDifficultyIndex(string difficultySetting, string[] osuMapLines)
@@ -72,6 +76,11 @@ namespace ChangeOsuParam
             difficultyLineArgs[1] = newDifficultyValue;
             var newLine = string.Join(':', difficultyLineArgs);
             return newLine;
+        }
+
+        private void SaveChangesToFile(string[] osuMapLines)
+        {
+            File.WriteAllLines(this._osuMapPath, osuMapLines);
         }
     }
 }

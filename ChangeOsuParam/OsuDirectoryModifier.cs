@@ -34,7 +34,7 @@ namespace ChangeOsuParam
             }
         }
 
-        public void ModifyOsuDirectoriesSafe(InputArguments inputArguments)
+        public void TryModifyOsuDirectories(InputArguments inputArguments)
         {
             try
             {
@@ -48,8 +48,10 @@ namespace ChangeOsuParam
 
         private void ModifyOsuDirecotriesUnsafe(InputArguments inputArguments)
         {
-            var selectedSongFolders = inputArguments.ChangeOnlyFirstMatchedFolder ? FetchOneSongFolder(inputArguments.SelectedFolderName, this.OsuSongsPath)
-                : FetchSongFolders(inputArguments.SelectedFolderName, this.OsuSongsPath);
+            var selectedSongFolders = inputArguments.ChangeOnlyFirstMatchedFolder ?
+                  FetchOneSongFolder(inputArguments.SelectedFolderName, this.OsuSongsPath) :
+                  FetchSongFolders(inputArguments.SelectedFolderName, this.OsuSongsPath);
+
             selectedSongFolders = selectedSongFolders.ToList();
 
             foreach (var songFolder in selectedSongFolders)
